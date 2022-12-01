@@ -2,8 +2,11 @@ package account.configuration;
 
 import account.component.RestAccessDeniedHandler;
 import account.component.RestAuthenticationEntryPoint;
+import account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -16,6 +19,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -31,7 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
-
 
 
     @Override
@@ -63,5 +69,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(this.userDetailsService);
         return daoAuthenticationProvider;
     }
+
 
 }

@@ -5,6 +5,7 @@ import account.entity.logEvent;
 import account.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ public class LogService {
         addEvent(action, subject, object);
     }
 
+    @Async
     public List<Log> getAllEvents() {
         return logRepository.findAll();
     }

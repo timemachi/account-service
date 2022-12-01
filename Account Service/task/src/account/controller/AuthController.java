@@ -27,6 +27,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public UserDto signup(@Valid @RequestBody UserDto userDto) {
+
         return userService.addUser(userDto);
     }
 

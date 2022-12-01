@@ -2,6 +2,7 @@ package account.mapper;
 
 import account.dto.SalaryResponse;
 import account.dto.UserDto;
+import account.entity.Group;
 import account.entity.Salary;
 import account.entity.User;
 import account.util.DateUtils;
@@ -19,7 +20,7 @@ public class Mappers {
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getUsername());
         userDto.setRoles(user.getUserGroups().stream()
-                .map(group -> group.getName()).collect(Collectors.toCollection(TreeSet::new)));
+                .map(Group::getName).collect(Collectors.toCollection(TreeSet::new)));
         return userDto;
     }
 

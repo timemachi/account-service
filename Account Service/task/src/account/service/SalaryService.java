@@ -9,6 +9,7 @@ import account.repository.UserRepository;
 import account.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -70,7 +71,7 @@ public class SalaryService {
         userRepo.save(user);
     }
 
-    @Transactional
+    @Async
     public List<SalaryResponse> getSalary(String email) {
         User user = userService.getUserByName(email);
         return user.getSalary().stream()
@@ -79,7 +80,7 @@ public class SalaryService {
                 .toList();
     }
 
-    @Transactional
+    @Async
     public SalaryResponse getSalary(String email, String rawDate) {
         User user = userService.getUserByName(email);
         LocalDate period = DateUtils.parseDateFromMonthYear(rawDate);
