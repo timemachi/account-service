@@ -14,6 +14,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+        response.addHeader("WWW-Authenticate", "Basic realm= 'Access to the '/page' path'");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }

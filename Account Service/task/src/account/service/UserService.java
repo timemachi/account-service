@@ -158,10 +158,7 @@ public class UserService implements UserDetailsService {
 
     public boolean ifUserExist(String username) {
         Optional<User> optionalUser = userRepo.findByUsername(username);
-        if (optionalUser.isEmpty()) {
-            return false;
-        }
-        return true;
+        return optionalUser.isPresent();
     }
 
     public List<UserDto> getAllUser() {
